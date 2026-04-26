@@ -7,7 +7,8 @@ classifier = pipeline("sentiment-analysis", model="distilbert-base-uncased-finet
 # Define function
 def analyze_sentiment(text):
     result = classifier(text)[0]
-    return f"{result['label']} (confidence: {result['score']:.2f})"
+    confidence_percent = result['score'] * 100
+    return f"Prediction: {result['label']} (Confidence: {confidence_percent:.1f}%)"
 
 # Create Gradio UI
 demo = gr.Interface(
